@@ -1,4 +1,5 @@
 #include<Servo.h>
+
 #define enA 5           //RIGHT
 #define enB 6           //LEFT
 #define IN1 7
@@ -68,26 +69,12 @@ void setup()
 void loop()
 {
   command = receiveData();
-  // Serial.println(command);
-  
-  // bool RS_val= digitalRead(RS);
-  // bool LS_val= digitalRead(LS);
-  // bool MR_val= digitalRead(MR);
-
-  // Serial.print("MR_val = ");
-  // Serial.println((MR_val));
-  // Serial.print("RS_val = ");
-  // Serial.println((RS_val));
-  // Serial.print("LS_val = ");
-  // Serial.println((LS_val));
 
   // delay(500);
   if (command == 'W')
     driveMode = AUTO;
   if (command == 'w')  
     driveMode = MANUAL;
-//  Serial.println(command);
-  // Serial.println(driveMode);
   
   if (driveMode == MANUAL)
     manualMode(command);
@@ -276,12 +263,6 @@ void autoMode()
     ML_direction(FORWARD);
     MR_direction(FORWARD);
   }
-  // else if ((RS_val==LOW && LS_val==LOW) || ((RS_val==HIGH && MR_val==HIGH) && LS_val==HIGH)) //for the perpendicular line that will be in the middle
-  // {
-  //   straightSpeed();
-  //   ML_direction(FORWARD);
-  //   MR_direction(FORWARD);
-  // }
 }
 
 
@@ -326,22 +307,11 @@ void obstacle_avoidance()
     ML_direction(FORWARD);
     MR_direction(FORWARD);
   }while(digitalRead(RS)==LOW && digitalRead(LS)==LOW && digitalRead(MR)==LOW);
-  
-  // delay(1000);
-
-  // delay(10);
-  // back_on_line=millis();
-  // do{
-  //   analogWrite(enA,70); 
-  //   analogWrite(enB, 70); 
-  //   ML_direction(BACKWARD);
-  //   MR_direction(FORWARD);
-  // }
-  // while(millis()-back_on_line<1000);    //this value needs to be foudnd through trial n test, to see how long it takes to get back on line
 }
   
 
- void servo_motion(){
+ void servo_motion()
+ {
   servo.write(90);
   delay(1000);
   servo.write(180);
